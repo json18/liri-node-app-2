@@ -53,10 +53,10 @@ var findMovie = function(movie) {
 
 var findMovie = function(movie) {
     var queryUrl = "http://www.omdbapi.com/?t=" + userSearch + "&y=&plot=short&apikey=trilogy";
-        console.log("this is the query URL", queryUrl);
+        //console.log("this is the query URL", queryUrl);
     request(queryUrl, function(error, response, body) {
         if (!error && response.statusCode === 200) {
-            console.log("body", JSON.parse(body));
+            //console.log("body", JSON.parse(body));
             console.log("Title: " + JSON.parse(body).Title);
             console.log("Release Year: " + JSON.parse(body).Year);
             console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
@@ -66,6 +66,7 @@ var findMovie = function(movie) {
             console.log("Plot: " + JSON.parse(body).Plot);
             console.log("Actors: " + JSON.parse(body).Actors);
     }
+    // still need to be able to take in multiple words
     });
 }
 
