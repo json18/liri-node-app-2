@@ -19,24 +19,29 @@ var getSpotify = function(song) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
-    //    console.log(data, "this is data"); 
-    //    console.log(data.tracks, "this is the items in data");
-    //    console.log("object", data.tracks.items[0].album, null, 2)
+                    //    console.log(data, "this is data"); 
+                    //    console.log(data.tracks, "this is the items in data");
+                    //    console.log("object", data.tracks.items[0].album, null, 2)
        console.log("Artist: ", data.tracks.items[0].artists[0].name)
        console.log("Name: ", data.tracks.items[0].name)
        console.log("Link to preview song: ", data.tracks.items[0].external_urls)
        console.log("Album: ", data.tracks.items[0].album.name)
       });
 }
+// still need to make it so that multiple words work also without the dash!!!
 
 
  var getTwitter = function(tweet) {
      if(process.argv[2] = "my-tweets") {
         client.get('statuses/user_timeline', function(error, tweets, response) {
             if (!error) {
-            //   console.log("this is tweets", tweets);
-              console.log("Tweeted", tweets[0].text, "at", tweets[0].created_at);
-              // only prints out the first tweet, still need to print out up to 20
+                                //  console.log("this is tweets: ", tweets);
+                                //  console.log ("this is tweets.length: ", tweets.length);
+                for (var i = 0; i < tweets.length; i++) {
+                    if (i < 20) {
+                        console.log(tweets[i].text, "at", tweets[i].created_at);
+                    }
+                }
             }
           });
      }
@@ -89,7 +94,7 @@ var readRandom = function(data){
         if (output[0] === "my-tweets") {
             getTwitter(output[1]);
         }
-        if (output[0] ==="movie-this") {
+        if (output[0] === "movie-this") {
             findMovie(output[1]);
         }
         if (output[0] === "do-what-it-says") {
@@ -98,8 +103,6 @@ var readRandom = function(data){
           
         });
 }
-
-
 
 var commandTypes = function () {
     if (process.argv[2] === "spotify-this-song") {
