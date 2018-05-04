@@ -1,11 +1,10 @@
 require("dotenv").config();
 
 var keys = require("./keys.js");
-
 var Spotify = require("node-spotify-api");
 var Twitter = require('twitter');
 var request = require("request");
-
+var fs = require("fs");
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
@@ -66,18 +65,52 @@ var findMovie = function(movie) {
             console.log("Plot: " + JSON.parse(body).Plot);
             console.log("Actors: " + JSON.parse(body).Actors);
     }
-    // still need to be able to take in multiple words
+    // STILL NEED TO DO: still need to be able to take in multiple words
     });
 }
 
-if (process.argv[2] === "spotify-this-song") {
-    getSpotify(userSearch);
+var readRandom = function(data){
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+            return console.log(error);
+          }
+          console.log("this is data", data);
+          
+          var output = data.split(",");
+           console.log("this is output[0],", output[0]);
+
+          
+        if (output[0]=== "spotify-this-song") {
+            getSpotify(output[1]);
+        }
+        if (output[0] === "my-tweets") {
+            getTwitter(output[1]);
+        }
+        if (output[0] ==="movie-this") {
+            findMovie(output[1]);
+        }
+        if (output[0] === "do-what-it-says") {
+            readRandom(output[1]);
+        }
+          
+        });
 }
 
-if (process.argv[2] === "my-tweets") {
-    getTwitter();
+
+
+var commandTypes = function () {
+    if (process.argv[2] === "spotify-this-song") {
+        getSpotify(userSearch);
+    }
+    if (process.argv[2] === "my-tweets") {
+        getTwitter();
+    }
+    if (process.argv[2] ==="movie-this") {
+        findMovie();
+    }
+    if (process.argv[2] === "do-what-it-says") {
+        readRandom();
+    }
 }
 
-if (process.argv[2] ==="movie-this") {
-    findMovie();
-}
+commandTypes();
