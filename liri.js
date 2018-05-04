@@ -83,6 +83,9 @@ var readRandom = function(data){
         if (output[0]=== "spotify-this-song") {
             getSpotify(output[1]);
         }
+
+
+        // still need to get these to work!!
         if (output[0] === "my-tweets") {
             getTwitter(output[1]);
         }
