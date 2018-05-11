@@ -11,11 +11,25 @@ var client = new Twitter(keys.twitter);
 var userSearch = process.argv[3];
 
 
-var getSpotify = function(song) {
-    if (song === undefined) {
-        song = "The Sign"
+var getSpotify = function(spotifyName) {
+    var nodeArgs = process.argv[3];
+    var spotifyName = "";
+
+    // for (var i = 2; i < nodeArgs.length; i++) {
+
+    //     if (i > 2 && i < nodeArgs.length) {
+    //         spotifyName = spotifyName + " " + nodeArgs[i];
+    //     }
+    //     else {
+    //         spotifyName += nodeArgs[i];
+    //     }
+    // }
+
+    console.log("this is spotifyName: ", spotifyName)
+    if (spotifyName === undefined) {
+        spotifyName = "The Sign"
     }
-    spotify.search({ type: 'track', query: song }, function(err, data) {
+    spotify.search({ type: 'track', query: spotifyName }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
@@ -29,6 +43,18 @@ var getSpotify = function(song) {
       });
 }
 // still need to make it so that multiple words work also without the dash!!!
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  var getTwitter = function(tweet) {
